@@ -61,10 +61,12 @@ public class FotoController {
 
     // metodo che salva le foto inserite nel DB
     @PostMapping("/create")
-    public String store(@Valid @ModelAttribute("foto") Foto formFoto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String store(@Valid @ModelAttribute("foto") Foto formFoto, BindingResult bindingResult,
+                        RedirectAttributes redirectAttributes, Model model) {
         // verifico che i dati sono corretti prima di salvare
         if (bindingResult.hasErrors()){
             // ci sono errori quindi devo ricaricare il form
+            model.addAttribute("categoryList", categoryService.getAllCategories());
             return "fotos/form";
         }
         // prima di salvare il libro gli setto visibile di default
@@ -94,10 +96,12 @@ public class FotoController {
 
     // metodo che salva la foto modificata
     @PostMapping("/edit/{id}")
-    public String update(@PathVariable Integer id,@Valid @ModelAttribute Foto formFoto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String update(@PathVariable Integer id,@Valid @ModelAttribute Foto formFoto, BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes, Model model) {
         // valido il form delle foto
         if (bindingResult.hasErrors()){
             // ci sono errori quindi ricarico il form
+            model.addAttribute("categoryList", categoryService.getAllCategories());
             return "fotos/form";
         }
         try {
