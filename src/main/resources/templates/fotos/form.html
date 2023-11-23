@@ -8,7 +8,7 @@
       th:text="${isEdit ? 'Modifica Foto' : 'Crea Foto'}"></h1>
   <hr>
   <form
-      th:with="actionUrl=${isEdit ? '/fotos/edit/' + foto.id : '/fotos/store'}"
+      th:with="actionUrl=${isEdit ? '/fotos/edit/' + foto.id : '/fotos/create'}"
       th:action="@{${actionUrl}}"
       th:object="${foto}"
       method="post"
