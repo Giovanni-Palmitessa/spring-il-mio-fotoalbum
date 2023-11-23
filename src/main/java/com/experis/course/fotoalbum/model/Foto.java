@@ -10,6 +10,7 @@ public class Foto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
+    @Lob
     private String description;
     private String imageUrl;
     private boolean visible;
