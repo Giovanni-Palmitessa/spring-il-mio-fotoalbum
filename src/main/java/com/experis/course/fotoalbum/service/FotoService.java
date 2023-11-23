@@ -4,7 +4,9 @@ import com.experis.course.fotoalbum.exceptions.FotoNotFoundException;
 import com.experis.course.fotoalbum.model.Foto;
 import com.experis.course.fotoalbum.repository.FotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +41,15 @@ public class FotoService {
             return result.get();
         } else {
             throw new FotoNotFoundException("Foto con id " + id + " non trovata!");
+        }
+    }
+
+    // metodo che salva la foto
+    public Foto createFoto(Foto foto) {
+        try{
+            return fotoRepository.save(foto);
+        } catch (ResponseStatusException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 }

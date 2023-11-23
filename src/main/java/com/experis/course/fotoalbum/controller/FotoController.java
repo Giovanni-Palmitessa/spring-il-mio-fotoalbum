@@ -69,7 +69,7 @@ public class FotoController {
         // prima di salvare il libro gli setto visibile di default
         formFoto.setVisible(true);
         // Salvo la foto
-        Foto savedFoto = fotoRepository.save(formFoto);
+        Foto savedFoto = fotoService.createFoto(formFoto);
         // reindirizzo allo show del libro appena creato
         // aggiungo attributo per mostrare messaggio di conferma modifica
         redirectAttributes.addFlashAttribute("message",
