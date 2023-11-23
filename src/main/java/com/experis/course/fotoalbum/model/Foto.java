@@ -28,7 +28,7 @@ public class Foto {
     @Column(nullable = false)
     private boolean visible;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     private List<Category> categories;
 
     // GETTER E SETTER
