@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="fragments/resources :: headResources('Foto List')"></head>
+<head th:insert="~{fragments/resources :: headResources('Foto List')}"></head>
 <body>
 <!--NAVBAR-->
 <header>
-    <nav th:replace="fragments/navbar :: topNavbar('fotos')"></nav>
+    <nav th:replace="~{fragments/navbar :: topNavbar('fotos')}"></nav>
 </header>
 
 <!--MAIN-->
