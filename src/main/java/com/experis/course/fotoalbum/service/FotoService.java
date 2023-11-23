@@ -1,5 +1,6 @@
 package com.experis.course.fotoalbum.service;
 
+import com.experis.course.fotoalbum.exceptions.FotoNotFoundException;
 import com.experis.course.fotoalbum.model.Foto;
 import com.experis.course.fotoalbum.repository.FotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,15 @@ public class FotoService {
     }
 
     // metodo che restituisce una foto presa per id, altrimenti tira eccezione
-    public Foto getFotoById(Integer id){
-
+    public Foto getFotoById(Integer id) throws FotoNotFoundException{
+        // aggiungo un opzionale poichè potrei trovare la foto o no
+        Optional<Foto> result = fotoRepository.findById(id);
+        // verifico se il risultato è presente
+        if (result.isPresent()){
+            // gli passo l'id con model attribute
+            return result.get();
+        } else {
+            throw new FotoNotFoundException("Foto con id " + id + " non trovata!");
+        }
     }
 }
