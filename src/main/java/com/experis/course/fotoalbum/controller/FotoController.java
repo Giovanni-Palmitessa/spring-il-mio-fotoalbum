@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -113,12 +114,15 @@ public class FotoController {
 
     // metodo che elimina la foto
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id) {
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         // cerco la foto tramite id e se non la trovo lancio eccezione
         Foto fotoToDelete =
                 fotoRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
         // se esiste la foto la elimino
         fotoRepository.deleteById(id);
+        // aggiungo attributo per mostrare messaggio di conferma eliminazione
+        redirectAttributes.addFlashAttribute("message",
+                "La foto " + fotoToDelete.getTitle() +" è stata eliminata con successo!");
         return "redirect:/fotos";
     }
 }
