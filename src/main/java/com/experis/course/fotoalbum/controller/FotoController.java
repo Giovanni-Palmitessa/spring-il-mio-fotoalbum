@@ -97,7 +97,15 @@ public class FotoController {
 
     // metodo che salva la foto modificata
     @PostMapping("/edit/{id}")
-    public String update() {
-
+    public String update(@PathVariable Integer id,@Valid @ModelAttribute Foto formFoto, BindingResult bindingResult) {
+        // valido il form delle foto
+        if (bindingResult.hasErrors()){
+            // ci sono errori quindi ricarico il form
+            return "fotos/form";
+        }
+        // non ci sono errori quindi salvo la mia foto modificata
+        Foto savedFoto = fotoRepository.save(formFoto);
+        // faccio il redirect alla pagina di dettagli della foto modificata
+        return "redirect:/fotos/show/" + savedFoto.getId();
     }
 }
