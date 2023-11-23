@@ -28,7 +28,7 @@ public class Foto {
     @Column(nullable = false)
     private boolean visible;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Category> categories;
 
     // GETTER E SETTER
@@ -70,5 +70,13 @@ public class Foto {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 }

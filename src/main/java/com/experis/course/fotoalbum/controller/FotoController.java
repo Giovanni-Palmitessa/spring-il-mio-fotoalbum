@@ -2,6 +2,7 @@ package com.experis.course.fotoalbum.controller;
 
 import com.experis.course.fotoalbum.exceptions.FotoNotFoundException;
 import com.experis.course.fotoalbum.model.Foto;
+import com.experis.course.fotoalbum.service.CategoryService;
 import com.experis.course.fotoalbum.service.FotoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class FotoController {
     // ATTRIBUTI
     @Autowired
     private FotoService fotoService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     // Index mi mostra tutte le foto
     @GetMapping
@@ -51,6 +55,7 @@ public class FotoController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("foto", new Foto());
+        model.addAttribute("categoryList", categoryService.getAllCategories());
         return "fotos/form";
     }
 
