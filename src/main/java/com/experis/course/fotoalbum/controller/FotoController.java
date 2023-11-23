@@ -2,6 +2,7 @@ package com.experis.course.fotoalbum.controller;
 
 import com.experis.course.fotoalbum.model.Foto;
 import com.experis.course.fotoalbum.repository.FotoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -63,7 +64,7 @@ public class FotoController {
 
     // metodo che salva le foto inserite nel DB
     @PostMapping("/create")
-    public String store(Foto formFoto) {
+    public String store(@Valid Foto formFoto) {
         // prima di salvare il libro gli setto visibile di default
         formFoto.setVisible(true);
         // Salvo la foto
