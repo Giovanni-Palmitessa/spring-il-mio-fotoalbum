@@ -30,13 +30,16 @@
             </form>
         </section>-->
         <section class="mt-4">
-            <ul class="list-group">
-                <li
-                    th:each="category : ${categoryList}"
-                    th:text="${category.name}"
-                    class="list-group-item"
-                ></li>
-            </ul>
+            <div class="row">
+                <div class="col-sm-6 mb-3 mb-sm-0 d-flex flex-wrap">
+                    <div class="card" th:each="category : ${categoryList}">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${category.name}"></h5>
+                            <p class="card-text" th:text="${category.description}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 </main>
