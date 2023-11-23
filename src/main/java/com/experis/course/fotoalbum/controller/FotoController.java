@@ -29,7 +29,7 @@ public class FotoController {
         List<Foto> fotoList;
         if (search.isPresent()) {
             // se il parametro search è presente chiamo il metodo custom
-           fotoList = fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(search.get(), search.get());
+           fotoList = fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContaining(search.get(), search.get());
         } else {
             // se il parametro search non è presente mostro tutte le foto
             fotoList = fotoRepository.findAll();
