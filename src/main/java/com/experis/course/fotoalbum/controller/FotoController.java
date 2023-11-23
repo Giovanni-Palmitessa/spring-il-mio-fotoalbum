@@ -39,12 +39,11 @@ public class FotoController {
         // verifico se il risultato è presente
         if (result.isPresent()){
             // gli passo l'id con model attribute
-            model.addAttribute("fotos", result.get());
+            model.addAttribute("foto", result.get());
             return "fotos/show";
         } else {
             // se non trovo la foto sollevo eccezione
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
         }
-
     }
 }
