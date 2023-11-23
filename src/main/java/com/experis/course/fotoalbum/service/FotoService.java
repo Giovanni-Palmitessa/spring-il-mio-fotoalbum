@@ -52,4 +52,13 @@ public class FotoService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
+
+    // metodo che salva il libro modificato preso dall'id
+    public Foto editFoto(Foto foto) throws FotoNotFoundException {
+        try {
+            return fotoRepository.save(foto);
+        } catch (ResponseStatusException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
 }

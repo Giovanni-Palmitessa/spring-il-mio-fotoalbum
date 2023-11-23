@@ -98,15 +98,19 @@ public class FotoController {
             // ci sono errori quindi ricarico il form
             return "fotos/form";
         }
-        // prima di salvare il libro gli setto visibile di default
-        formFoto.setVisible(true);
-        // non ci sono errori quindi salvo la mia foto modificata
-        Foto savedFoto = fotoRepository.save(formFoto);
-        // aggiungo attributo per mostrare messaggio di conferma modifica
-        redirectAttributes.addFlashAttribute("message",
-                "La foto " + savedFoto.getTitle() +" è stata modificata con successo!");
-        // faccio il redirect alla pagina di dettagli della foto modificata
-        return "redirect:/fotos/show/" + savedFoto.getId();
+        try {
+            // prima di salvare il libro gli setto visibile di default
+            formFoto.setVisible(true);
+            // non ci sono errori quindi salvo la mia foto modificata
+            Foto savedFoto = fotoService.editFoto(formFoto);
+            // aggiungo attributo per mostrare messaggio di conferma modifica
+            redirectAttributes.addFlashAttribute("message",
+                    "La foto " + savedFoto.getTitle() +" è stata modificata con successo!");
+            // faccio il redirect alla pagina di dettagli della foto modificata
+            return "redirect:/fotos/show/" + savedFoto.getId();
+        } catch (FotoNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
+        }
     }
 
     // metodo che elimina la foto
