@@ -1,6 +1,9 @@
 package com.experis.course.fotoalbum.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Table(name = "fotos")
@@ -10,11 +13,14 @@ public class Foto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
+    @NotBlank(message = "Il titolo non può essere un campo vuoto!")
+    @Size(max = 255, message = "Il titolo deve essere > di 255 caratteri!")
     private String title;
     @Lob
     private String description;
     @Lob
     @Column(nullable = false)
+    @URL(message = "Il link deve essere un URL valido!")
     private String imageUrl;
     @Column(nullable = false)
     private boolean visible;
