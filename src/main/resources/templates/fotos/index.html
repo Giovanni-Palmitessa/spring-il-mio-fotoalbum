@@ -18,9 +18,9 @@
 
                 <!-- se foto presenti mostra le card -->
                 <div class="card mx-2 my-5" th:each="foto : ${fotoList}" th:object="${foto}" style="width:380px">
-                    <img th:src="*{imageURL}" alt="fotoIMG" class="card-img-top" style="height:300px">
-                    <div class="card-body" style="height:180px">
-                        <h5 th:text="${foto.name}"></h5>
+                    <img th:src="*{imageUrl}" alt="fotoIMG" class="card-img-top" style="height:300px">
+                    <div class="card-body" style="height:130px">
+                        <h5 th:text="*{title}"></h5>
                         <p class="card-text">
                             <span>Descrizione: </span>
                             <span th:text="*{description}"></span>
