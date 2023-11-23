@@ -28,12 +28,13 @@
 
     <!--TO DO CATEGORIE-->
 
-    <!--<div class="col-2">
-      <div class="form-check" th:each="ingredient : ${ingredientList}">
-        <input class="form-check-input" type="checkbox" th:value="${ingredient.id}" th:id="|ingredient_${ingredient.id}|" th:field="*{ingredients}">
-        <label class="form-check-label" th:for="|ingredient_${ingredient.id}|" th:text="${ingredient.name}"></label>
+    <div class="col-2">
+      <h3>Categorie</h3>
+      <div class="form-check" th:each="category : ${categoryList}">
+        <input class="form-check-input" type="checkbox" th:value="${category.id}" th:id="|category_${category.id}|" th:field="*{categories}">
+        <label class="form-check-label" th:for="|category_${category.id}|" th:text="${category.name}"></label>
       </div>
-    </div>-->
+    </div>
 
     <div class="col-12">
       <button class="btn btn-primary" type="submit">Salva</button>
