@@ -18,7 +18,7 @@ public class FotoController {
     // Index
     @GetMapping
     public String index() {
-        List<Foto> fotoList = null;
+        List<Foto> fotoList = fotoRepository.findAll();
         return "fotos/index";
     }
 }
