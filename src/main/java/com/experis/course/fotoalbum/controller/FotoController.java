@@ -16,11 +16,6 @@ public class FotoController {
     @Autowired
     private FotoRepository fotoRepository;
 
-    // COSTRUTTORE
-    public FotoController(FotoRepository fotoRepository) {
-        this.fotoRepository = fotoRepository;
-    }
-
     // Index
     @GetMapping
     public String index() {
