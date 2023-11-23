@@ -36,6 +36,8 @@ public class FotoController {
         }
         // passo al template la lista di Foto
         model.addAttribute("fotoList", fotoList);
+        // passo al template la stringa di ricerca per precaricare il valore dell'input
+        model.addAttribute("searchKeyword", search.orElse(""));
         return "fotos/index";
     }
 
