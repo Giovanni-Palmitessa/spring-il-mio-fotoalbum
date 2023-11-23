@@ -64,6 +64,7 @@ public class FotoController {
     // metodo che salva le foto inserite nel DB
     @PostMapping("/create")
     public String store(Foto formFoto) {
+        formFoto.setVisible(true);
         Foto savedFoto = fotoRepository.save(formFoto);
         return "redirect:/fotos";
     }
