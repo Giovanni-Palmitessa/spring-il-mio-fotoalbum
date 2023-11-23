@@ -65,7 +65,7 @@ public class FotoController {
 
     // metodo che salva le foto inserite nel DB
     @PostMapping("/create")
-    public String store(@Valid Foto formFoto, BindingResult bindingResult) {
+    public String store(@Valid @ModelAttribute("foto") Foto formFoto, BindingResult bindingResult) {
         // verifico che i dati sono corretti prima di salvare
         if (bindingResult.hasErrors()){
             // ci sono errori quindi devo ricaricare il form
