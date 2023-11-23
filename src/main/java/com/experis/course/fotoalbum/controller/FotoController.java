@@ -93,6 +93,11 @@ public class FotoController {
             // se non trovo la foto sollevo eccezione
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
         }
+    }
+
+    // metodo che salva la foto modificata
+    @PostMapping("/edit/{id}")
+    public String update() {
 
     }
 }
