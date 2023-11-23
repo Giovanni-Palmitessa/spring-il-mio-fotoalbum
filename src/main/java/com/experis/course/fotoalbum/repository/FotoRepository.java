@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface FotoRepository extends JpaRepository<Foto, Integer> {
     // query che filtra le foto per titolo
-    List<Foto> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String titleKeyword, String authorsKeyword);
+    List<Foto> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String titleKeyword, String descriptionKeyword);
 }
