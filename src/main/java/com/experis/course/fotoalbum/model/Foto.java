@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.URL;
 
+import java.util.List;
+
 @Entity
 @Table(name = "fotos")
 public class Foto {
@@ -25,6 +27,9 @@ public class Foto {
     private String imageUrl;
     @Column(nullable = false)
     private boolean visible;
+
+    @ManyToMany
+    private List<Category> categories;
 
     // GETTER E SETTER
     public Integer getId() {
