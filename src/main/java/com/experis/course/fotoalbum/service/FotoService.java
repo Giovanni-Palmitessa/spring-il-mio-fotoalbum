@@ -27,4 +27,9 @@ public class FotoService {
             return fotoRepository.findAll();
         }
     }
+
+    // metodo che restituisce una foto presa per id, altrimenti tira eccezione
+    public Foto getFotoById(Integer id){
+
+    }
 }
