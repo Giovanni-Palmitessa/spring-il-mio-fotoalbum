@@ -1,0 +1,10 @@
+INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('Meravigliosa cena romantica con vista sulla Torre Eiffel', 'https://picsum.photos/400/500', 'Cena romantica a Parigi', 1);
+INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('Escursione emozionante nelle foreste pluviali dell\'Amazzonia', 'https://picsum.photos/400/500', 'Avventura in Amazzonia', 1);
+INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('Esplorazione delle antiche rovine di Machu Picchu al tramonto', 'https://picsum.photos/400/500', 'Viaggio a Machu Picchu', 1);
+INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('Tour gastronomico attraverso le strade di Napoli', 'https://picsum.photos/400/500', 'Giro culinario a Napoli', 1);
+INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('Incredibile immersione tra i coralli della Grande Barriera Corallina', 'https://picsum.photos/400/500', 'Subacquea in Australia', 1);
+INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('Spettacolare tramonto sulla spiaggia di Bora Bora', 'https://picsum.photos/400/500', 'Tramonto a Bora Bora', 1);
+INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('Tour enogastronomico nelle colline toscane', 'https://picsum.photos/400/500', 'Viaggio enogastronomico in Toscana', 1);
+INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('Esplorazione della Città Proibita a Pechino', 'https://picsum.photos/400/500', 'Viaggio a Pechino', 1);
+INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('Fascinante passeggiata lungo il Canal Grande a Venezia', 'https://picsum.photos/400/500', 'Venezia romantica', 1);
+INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('Escursione tra i vigneti della Valle della Loira', 'https://picsum.photos/400/500', 'Tour dei vigneti in Valle della Loira', 1);
