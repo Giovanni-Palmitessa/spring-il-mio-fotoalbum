@@ -30,11 +30,13 @@
                     <p class="card-text fw-semibold fs-4" th:text="*{description}"></p>
 
                     <!--TO DO METTERE CATEGORIE-->
-                    <!--<h3>Ingredienti</h3>
-                    <ul th:if="*{ingredients.size() > 0}">
-                        <li th:each="ingredientObj : *{ingredients}" th:text="${ingredientObj.name}"></li>
+                    <h3 class="text-danger">Categorie</h3>
+                    <ul th:if="*{categories.size() > 0}">
+                        <li th:each="categoryObj : *{categories}" >
+                            <span class="badge rounded-pill text-bg-warning" th:text="${categoryObj.name}"></span>
+                        </li>
                     </ul>
-                    <div th:unless="*{ingredients.size() > 0}" class="alert alert-danger">Nessun Ingrediente</div>-->
+                    <div th:unless="*{categories.size() > 0}" class="alert alert-danger">Nessuna Categoria</div>
                 </div>
             </div>
         </div>
