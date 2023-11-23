@@ -31,6 +31,6 @@ public class FotoController {
     // Show che mostra il libro preso per id
     @GetMapping("/show/{id}")
     public String show(@PathVariable Integer id) {
-        return null;
+        return "fotos/show";
     }
 }
