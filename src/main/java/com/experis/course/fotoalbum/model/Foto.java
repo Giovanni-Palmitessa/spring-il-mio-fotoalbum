@@ -20,6 +20,7 @@ public class Foto {
     private String description;
     @Lob
     @Column(nullable = false)
+    @NotBlank(message = "Il link non può essere un campo vuoto!")
     @URL(message = "Il link deve essere un URL valido!")
     private String imageUrl;
     @Column(nullable = false)
