@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{/fragments/resources :: headResources('Show Foto')}"></head>
+<body>
+<!--NAVBAR-->
+<nav th:replace="~{/fragments/navbar :: topNavbar('fotos')}"></nav>
+
+<!--MAIN-->
+<div class="container" th:object="${foto}">
+    <!--Messaggio creazione foto TO DO-->
+    <!--<div th:if="${message != null}" class="alert alert-success alert-dismissible fade show mt-4">
+        <span th:text="${message}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>-->
+
+    <!-- TITOLO -->
+    <h1 class="text-center text-danger fw-bolder text-decoration-underline pt-4" th:text="*{title}"></h1>
+
+    <div class="d-flex justify-content-center pt-2">
+        <a th:href="@{/fotos}" class="text-primary-emphasis fw-semibold fs-5"><-- Torna alle foto</a>
+    </div>
+
+    <!--    CARD FOTO -->
+    <div class="d-flex justify-content-center">
+        <div class="card text-bg-dark w-75 my-5">
+            <img th:src="*{imageUrl}" alt="FotoIMG" class="card-img h-100">
+            <div class="card-img-overlay">
+                <div class="bg-dark p-3 bg-opacity-75 rounded-5">
+                    <h3 class="card-title fw-bold text-success" th:text="*{title}"></h3>
+                    <p class="card-text fw-semibold fs-4" th:text="*{description}"></p>
+
+                    <!--TO DO METTERE CATEGORIE-->
+                    <!--<h3>Ingredienti</h3>
+                    <ul th:if="*{ingredients.size() > 0}">
+                        <li th:each="ingredientObj : *{ingredients}" th:text="${ingredientObj.name}"></li>
+                    </ul>
+                    <div th:unless="*{ingredients.size() > 0}" class="alert alert-danger">Nessun Ingrediente</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
