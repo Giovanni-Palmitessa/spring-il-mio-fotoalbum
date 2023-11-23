@@ -21,7 +21,7 @@ public class FotoController {
     @Autowired
     private FotoRepository fotoRepository;
 
-    // Index
+    // Index mi mostra tutte le foto
     @GetMapping
     public String index(@RequestParam Optional<String> search, Model model) {
         // inizializzo lista di foto
@@ -77,5 +77,11 @@ public class FotoController {
         Foto savedFoto = fotoRepository.save(formFoto);
         // reindirizzo allo show del libro appena creato
         return "redirect:/fotos/show/" + savedFoto.getId();
+    }
+
+    // metodo che mi permette di editare una foto esisitente tramite id
+    @GetMapping("/edit/{id}")
+    public String edit(){
+
     }
 }
