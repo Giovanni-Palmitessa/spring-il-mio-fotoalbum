@@ -60,6 +60,6 @@ public class FotoController {
     // metodo che mostra il template per creare una nuova foto
     @GetMapping("/create")
     public String create() {
-
+        return "fotos/form";
     }
 }
