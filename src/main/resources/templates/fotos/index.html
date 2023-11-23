@@ -64,13 +64,13 @@
                             <a th:href="@{/fotos/edit/{id}(id=*{id})}" class="card-link text-dark text-decoration-none">Modifica</a>
                         </button>
 
-                        <!-- Button trigger modal -->
-                        <!--<button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="|#exampleModal_*{id}|" sec:authorize="hasAuthority('ADMIN')">
+                        <!-- Button trigger modal-->
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="|#exampleModal_*{id}|">
                             Cancella
-                        </button>-->
+                        </button>
 
-                        <!-- Modal -->
-                        <!--<div class="modal fade" th:id="|exampleModal_*{id}|" tabindex="-1" th:aria-labelledby="|exampleModalLabel_*{id}|" aria-hidden="true">
+                         <!--Modal-->
+                        <div class="modal fade" th:id="|exampleModal_*{id}|" tabindex="-1" th:aria-labelledby="|exampleModalLabel_*{id}|" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -78,17 +78,17 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        Sei sicuro di voler eliminare la pizza [[*{id}]] selezionata? L'operazione è irreversibile!
+                                        Sei sicuro di voler eliminare la foto selezionata? L'operazione è irreversibile!
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                                        <form method="POST" th:action="@{/pizzas/delete/{id}(id=*{id})}">
+                                        <form method="POST" th:action="@{/fotos/delete/{id}(id=*{id})}">
                                             <button type="submit" class="btn btn-danger">Cancella</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                        </div>-->
+                        </div>
                     </div>
                 </div>
             </div>
