@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -29,11 +28,8 @@ public class FotoController {
     // Index mi mostra tutte le foto
     @GetMapping
     public String index(@RequestParam Optional<String> search, Model model) {
-        // inizializzo lista di foto
-        List<Foto> fotoList;
-
         // passo al template la lista di Foto
-        model.addAttribute("fotoList", fotoList);
+        model.addAttribute("fotoList", fotoService.getFotoList(search));
         // passo al template la stringa di ricerca per precaricare il valore dell'input
         model.addAttribute("searchKeyword", search.orElse(""));
         return "fotos/index";
