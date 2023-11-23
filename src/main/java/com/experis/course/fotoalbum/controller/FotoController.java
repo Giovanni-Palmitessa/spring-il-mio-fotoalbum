@@ -2,7 +2,6 @@ package com.experis.course.fotoalbum.controller;
 
 import com.experis.course.fotoalbum.exceptions.FotoNotFoundException;
 import com.experis.course.fotoalbum.model.Foto;
-import com.experis.course.fotoalbum.repository.FotoRepository;
 import com.experis.course.fotoalbum.service.FotoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,6 @@ import java.util.Optional;
 @RequestMapping("/fotos")
 public class FotoController {
     // ATTRIBUTI
-    @Autowired
-    private FotoRepository fotoRepository;
-
     @Autowired
     private FotoService fotoService;
 
