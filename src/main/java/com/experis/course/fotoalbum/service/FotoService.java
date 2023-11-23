@@ -14,7 +14,6 @@ import java.util.Optional;
 @Service
 public class FotoService {
     // Repository
-
     @Autowired
     private FotoRepository fotoRepository;
 
