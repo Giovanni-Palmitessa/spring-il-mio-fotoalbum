@@ -7,11 +7,11 @@
 
 <!--MAIN-->
 <div class="container" th:object="${foto}">
-    <!--Messaggio creazione foto TO DO-->
-    <!--<div th:if="${message != null}" class="alert alert-success alert-dismissible fade show mt-4">
+    <!--Messaggio creazione e modifica foto -->
+    <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show mt-4">
         <span th:text="${message}"></span>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>-->
+    </div>
 
     <!-- TITOLO -->
     <h1 class="text-center text-danger fw-bolder text-decoration-underline pt-4" th:text="*{title}"></h1>
