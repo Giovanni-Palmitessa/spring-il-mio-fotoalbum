@@ -2,6 +2,7 @@ package com.experis.course.fotoalbum.controller;
 
 import com.experis.course.fotoalbum.model.Foto;
 import com.experis.course.fotoalbum.repository.FotoRepository;
+import com.experis.course.fotoalbum.service.FotoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,18 +23,15 @@ public class FotoController {
     @Autowired
     private FotoRepository fotoRepository;
 
+    @Autowired
+    private FotoService fotoService;
+
     // Index mi mostra tutte le foto
     @GetMapping
     public String index(@RequestParam Optional<String> search, Model model) {
         // inizializzo lista di foto
         List<Foto> fotoList;
-        if (search.isPresent()) {
-            // se il parametro search è presente chiamo il metodo custom
-           fotoList = fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContaining(search.get(), search.get());
-        } else {
-            // se il parametro search non è presente mostro tutte le foto
-            fotoList = fotoRepository.findAll();
-        }
+
         // passo al template la lista di Foto
         model.addAttribute("fotoList", fotoList);
         // passo al template la stringa di ricerca per precaricare il valore dell'input
