@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -64,7 +65,12 @@ public class FotoController {
 
     // metodo che salva le foto inserite nel DB
     @PostMapping("/create")
-    public String store(@Valid Foto formFoto) {
+    public String store(@Valid Foto formFoto, BindingResult bindingResult) {
+        // verifico che i dati sono corretti prima di salvare
+        if (bindingResult.hasErrors()){
+            // ci sono errori quindi devo ricaricare il form
+            return "fotos/form";
+        }
         // prima di salvare il libro gli setto visibile di default
         formFoto.setVisible(true);
         // Salvo la foto
