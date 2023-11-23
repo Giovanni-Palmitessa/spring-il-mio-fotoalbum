@@ -84,6 +84,7 @@ public class FotoController {
         try {
             // gli passo l'id con model attribute
             model.addAttribute("foto", fotoService.getFotoById(id));
+            model.addAttribute("categoryList", categoryService.getAllCategories());
             return "fotos/form";
         } catch (FotoNotFoundException e) {
             // se non trovo la foto sollevo eccezione
