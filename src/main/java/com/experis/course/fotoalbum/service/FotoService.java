@@ -61,4 +61,9 @@ public class FotoService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
+
+    // metodo che elimina il libro passato tramite id
+    public void deleteFoto(Integer id){
+        fotoRepository.deleteById(id);
+    }
 }

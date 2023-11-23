@@ -116,14 +116,17 @@ public class FotoController {
     // metodo che elimina la foto
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
-        // cerco la foto tramite id e se non la trovo lancio eccezione
-        Foto fotoToDelete =
-                fotoRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        // se esiste la foto la elimino
-        fotoRepository.deleteById(id);
-        // aggiungo attributo per mostrare messaggio di conferma eliminazione
-        redirectAttributes.addFlashAttribute("message",
-                "La foto " + fotoToDelete.getTitle() +" è stata eliminata con successo!");
-        return "redirect:/fotos";
+        try {
+            // cerco la foto tramite id e se non la trovo lancio eccezione
+            Foto fotoToDelete = fotoService.getFotoById(id);
+            // se esiste la foto la elimino
+            fotoService.deleteFoto(id);
+            // aggiungo attributo per mostrare messaggio di conferma eliminazione
+            redirectAttributes.addFlashAttribute("message",
+                    "La foto " + fotoToDelete.getTitle() +" è stata eliminata con successo!");
+            return "redirect:/fotos";
+        } catch (FotoNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
+        }
     }
 }
