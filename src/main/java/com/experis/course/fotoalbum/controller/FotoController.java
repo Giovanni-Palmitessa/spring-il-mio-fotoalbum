@@ -110,4 +110,15 @@ public class FotoController {
         // faccio il redirect alla pagina di dettagli della foto modificata
         return "redirect:/fotos/show/" + savedFoto.getId();
     }
+
+    // metodo che elimina la foto
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        // cerco la foto tramite id e se non la trovo lancio eccezione
+        Foto fotoToDelete =
+                fotoRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        // se esiste la foto la elimino
+        fotoRepository.deleteById(id);
+        return "redirect:/fotos";
+    }
 }
