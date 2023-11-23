@@ -59,7 +59,8 @@ public class FotoController {
 
     // metodo che mostra il template per creare una nuova foto
     @GetMapping("/create")
-    public String create() {
+    public String create(Model model) {
+        model.addAttribute("foto", new Foto());
         return "fotos/form";
     }
 }
