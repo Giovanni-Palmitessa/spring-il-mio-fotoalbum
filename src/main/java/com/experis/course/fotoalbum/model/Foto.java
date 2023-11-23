@@ -12,6 +12,7 @@ public class Foto {
     private String title;
     @Lob
     private String description;
+    @Lob
     private String imageUrl;
     private boolean visible;
 
