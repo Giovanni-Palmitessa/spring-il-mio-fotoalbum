@@ -66,7 +66,7 @@ public class FotoController {
 
     // metodo che salva le foto inserite nel DB
     @PostMapping("/create")
-    public String store(@Valid @ModelAttribute("foto") Foto formFoto, BindingResult bindingResult) {
+    public String store(@Valid @ModelAttribute("foto") Foto formFoto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         // verifico che i dati sono corretti prima di salvare
         if (bindingResult.hasErrors()){
             // ci sono errori quindi devo ricaricare il form
@@ -77,6 +77,9 @@ public class FotoController {
         // Salvo la foto
         Foto savedFoto = fotoRepository.save(formFoto);
         // reindirizzo allo show del libro appena creato
+        // aggiungo attributo per mostrare messaggio di conferma modifica
+        redirectAttributes.addFlashAttribute("message",
+                "La foto " + savedFoto.getTitle() +" è stata creata con successo!");
         return "redirect:/fotos/show/" + savedFoto.getId();
     }
 
