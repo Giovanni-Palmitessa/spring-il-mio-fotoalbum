@@ -81,7 +81,18 @@ public class FotoController {
 
     // metodo che mi permette di editare una foto esisitente tramite id
     @GetMapping("/edit/{id}")
-    public String edit(){
+    public String edit(@PathVariable Integer id, Model model){
+        // aggiungo un opzionale poichè potrei trovare la foto o no
+        Optional<Foto> result = fotoRepository.findById(id);
+        // verifico se il risultato è presente
+        if (result.isPresent()){
+            // gli passo l'id con model attribute
+            model.addAttribute("foto", result.get());
+            return "fotos/form";
+        } else {
+            // se non trovo la foto sollevo eccezione
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
+        }
 
     }
 }
