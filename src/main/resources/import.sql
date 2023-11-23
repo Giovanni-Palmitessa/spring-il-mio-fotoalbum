@@ -8,3 +8,13 @@ INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('
 INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('Esplorazione della Città Proibita a Pechino', 'https://picsum.photos/400/500', 'Viaggio a Pechino', 1);
 INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('Fascinante passeggiata lungo il Canal Grande a Venezia', 'https://picsum.photos/400/500', 'Venezia romantica', 1);
 INSERT INTO db_fotoalbum.fotos (description, image_url, title, visible)VALUES ('Escursione tra i vigneti della Valle della Loira', 'https://picsum.photos/400/500', 'Tour dei vigneti in Valle della Loira', 1);
+INSERT INTO db_fotoalbum.categories (description, name) VALUES('Foto di feste e eventi vari', 'Festa');
+INSERT INTO db_fotoalbum.categories (description, name) VALUES ('Foto di paesaggi naturali', 'Natura');
+INSERT INTO db_fotoalbum.categories (description, name) VALUES ('Scatti artistici in bianco e nero', 'Arte');
+INSERT INTO db_fotoalbum.categories (description, name) VALUES ('Ritratti di persone famose', 'Ritratti');
+INSERT INTO db_fotoalbum.categories (description, name) VALUES ('Momenti sportivi indimenticabili', 'Sport');
+INSERT INTO db_fotoalbum.categories (description, name) VALUES ('Esperienze culinarie nel mondo', 'Cibo');
+INSERT INTO db_fotoalbum.categories (description, name) VALUES ('Viaggi avventurosi in luoghi remoti', 'Avventura');
+INSERT INTO db_fotoalbum.categories (description, name) VALUES ('Instantanea di vita quotidiana', 'Vita quotidiana');
+INSERT INTO db_fotoalbum.categories (description, name) VALUES ('Manifestazioni culturali e tradizioni', 'Cultura');
+INSERT INTO db_fotoalbum.categories (description, name) VALUES ('Momenti dolci e romantici', 'Amore');
