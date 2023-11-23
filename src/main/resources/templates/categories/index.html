@@ -10,7 +10,34 @@
 <!--MAIN-->
 <main>
     <div class="container">
-        <h1>Ciao</h1>
+        <h1>Categories</h1>
+        <hr>
+        <!--<section>
+            <form
+                id="category-form"
+                th:action="@{/categories}"
+                method="POST"
+                th:object="${categoryObj}"
+            >
+                <div class="mb-3"
+                     th:insert="fragments/components :: formField('text', 'Nome Categoria', 'name')">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descrizione</label>
+                    <textarea class="form-control" id="description" th:field="*{description}" rows="3"></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Aggiungi Categoria</button>
+            </form>
+        </section>-->
+        <section class="mt-4">
+            <ul class="list-group">
+                <li
+                    th:each="category : ${categoryList}"
+                    th:text="${category.name}"
+                    class="list-group-item"
+                ></li>
+            </ul>
+        </section>
     </div>
 </main>
 </body>
