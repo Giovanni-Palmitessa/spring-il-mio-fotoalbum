@@ -24,7 +24,12 @@
                     </div>
                 </form>
             </div>
+            <!-- BOTTONE PER CREARE NUOVA PIZZA-->
+            <div>
+                <a class="btn btn-warning mt-4" th:href="@{/fotos/create}">Aggiungi una nuova foto</a>
+            </div>
 
+            <!--MESSAGGIO SE NON SONO PRESENTI FOTO-->
             <div class="d-flex justify-content-between flex-wrap">
                 <!-- Se non presente nessuna foto mostra messaggio -->
                 <th:block th:if="${#lists.isEmpty(fotoList)}">
