@@ -60,9 +60,9 @@
                         <button type="button" class="btn btn-success">
                             <a th:href="@{/fotos/show/{id}(id=*{id})}" class="card-link text-white text-decoration-none">Mostra Dettagli</a>
                         </button>
-                        <!--<button type="button" class="btn btn-light" sec:authorize="hasAuthority('ADMIN')">
-                            <a th:href="@{/pizzas/edit/{id}(id=*{id})}" class="card-link text-dark text-decoration-none">Modifica</a>
-                        </button>-->
+                        <button type="button" class="btn btn-light">
+                            <a th:href="@{/fotos/edit/{id}(id=*{id})}" class="card-link text-dark text-decoration-none">Modifica</a>
+                        </button>
 
                         <!-- Button trigger modal -->
                         <!--<button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="|#exampleModal_*{id}|" sec:authorize="hasAuthority('ADMIN')">
