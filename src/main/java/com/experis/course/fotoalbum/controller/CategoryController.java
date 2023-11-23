@@ -8,6 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/categories")
 public class CategoryController {
+    // Service
     @Autowired
     CategoryService categoryService;
+
+    // Metodi
+    public String index() {
+        return "categories/index";
+    }
+
 }
