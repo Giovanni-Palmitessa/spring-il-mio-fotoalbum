@@ -82,7 +82,7 @@ public class FotoController {
             return "fotos/form";
         } catch (FotoNotFoundException e) {
             // se non trovo la foto sollevo eccezione
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!!");
         }
     }
 
