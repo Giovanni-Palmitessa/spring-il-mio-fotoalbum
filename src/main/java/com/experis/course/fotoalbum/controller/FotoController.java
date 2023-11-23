@@ -47,7 +47,7 @@ public class FotoController {
             return "fotos/show";
         } catch (FotoNotFoundException e) {
             // se non trovo la foto sollevo eccezione
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
         }
     }
 
@@ -80,14 +80,11 @@ public class FotoController {
     // metodo che mi permette di editare una foto esisitente tramite id
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
-        // aggiungo un opzionale poichè potrei trovare la foto o no
-        Optional<Foto> result = fotoRepository.findById(id);
-        // verifico se il risultato è presente
-        if (result.isPresent()){
+        try {
             // gli passo l'id con model attribute
-            model.addAttribute("foto", result.get());
+            model.addAttribute("foto", fotoService.getFotoById(id));
             return "fotos/form";
-        } else {
+        } catch (FotoNotFoundException e) {
             // se non trovo la foto sollevo eccezione
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
         }
