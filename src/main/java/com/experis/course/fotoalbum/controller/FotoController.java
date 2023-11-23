@@ -103,6 +103,8 @@ public class FotoController {
             // ci sono errori quindi ricarico il form
             return "fotos/form";
         }
+        // prima di salvare il libro gli setto visibile di default
+        formFoto.setVisible(true);
         // non ci sono errori quindi salvo la mia foto modificata
         Foto savedFoto = fotoRepository.save(formFoto);
         // faccio il redirect alla pagina di dettagli della foto modificata
