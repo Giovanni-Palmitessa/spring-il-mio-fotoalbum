@@ -56,4 +56,10 @@ public class FotoController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
         }
     }
+
+    // metodo che mostra il template per creare una nuova foto
+    @GetMapping("/create")
+    public String create() {
+
+    }
 }
