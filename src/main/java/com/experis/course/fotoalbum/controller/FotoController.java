@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -23,9 +24,16 @@ public class FotoController {
 
     // Index
     @GetMapping
-    public String index(Model model) {
-        // creo lista di foto
-        List<Foto> fotoList = fotoRepository.findAll();
+    public String index(@RequestParam Optional<String> search, Model model) {
+        // inizializzo lista di foto
+        List<Foto> fotoList;
+        if (search.isPresent()) {
+            // se il parametro search è presente chiamo il metodo custom
+           fotoList = fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(search.get(), search.get());
+        } else {
+            // se il parametro search non è presente mostro tutte le foto
+            fotoList = fotoRepository.findAll();
+        }
         // passo al template la lista di Foto
         model.addAttribute("fotoList", fotoList);
         return "fotos/index";
