@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <body>
 <nav th:fragment="topNavbar(area)" class="navbar navbar-expand-lg bg-primary navbar-dark">
     <div class="container-fluid">
@@ -19,10 +19,10 @@
                        th:href="@{/categories}">Categorie</a>
                 </li>
             </ul>
-            <!--<div class="text-light">
-                Hi <span sec:authentication="name"></span>
+            <div class="text-light">
+                Ciao, <span sec:authentication="name"></span>
                 <a th:href="@{/logout}" class="btn btn-light">Logout</a>
-            </div>-->
+            </div>
         </div>
     </div>
 </nav>
