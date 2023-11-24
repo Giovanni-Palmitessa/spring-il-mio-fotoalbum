@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 public class SecurityConfiguration {
     // metodi
     @Bean
-    DatabaseUserDetailsService userDetailsService(){
+    public DatabaseUserDetailsService userDetailsService(){
         return new DatabaseUserDetailsService();
     }
 }
