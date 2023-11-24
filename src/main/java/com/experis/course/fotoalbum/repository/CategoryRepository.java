@@ -10,5 +10,5 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     List<Category> findByOrderByName();
 
     // metodo per cercare le categorie per nome
-    boolean existByName(String name);
+    boolean existsByName(String name);
 }
