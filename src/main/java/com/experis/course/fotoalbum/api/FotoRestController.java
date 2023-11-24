@@ -29,7 +29,7 @@ public class FotoRestController {
 
     // endpoint per i dettagli del libro preso per id
     @GetMapping("/{id}")
-    public Foto details(@PathVariable Integer id) {
+    public Foto show(@PathVariable Integer id) {
         try {
             // se trovo la foto con id mostro i dettagli
             return fotoService.getFotoById(id);
