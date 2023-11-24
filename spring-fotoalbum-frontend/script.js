@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:8080/api/photos";
+const baseUrl = "http://localhost:8080/api/fotos";
 const root = document.getElementById("root");
 
 // Funzione per ottenere l'array delle foto
@@ -7,7 +7,7 @@ const getPhoto = async (searchName = "") => {
     const url = `${baseUrl}?search=${searchName}`;
     const response = await axios.get(url);
     if (Array.isArray(response.data)) {
-      renderPhotoList(response.data); // Assicurati che response.data sia l'array di foto
+      renderPhotoList(response.data);
     } else {
       console.error("Data format is incorrect:", response.data);
     }
@@ -25,18 +25,17 @@ const searchPhoto = () => {
 // Funzione per renderizzare ogni foto nell'elenco
 const renderPhoto = (element) => {
   return `
-    <div class="card" style="width: 15rem; height: 10rem">
-      <img src="${element.urlImage}" class="card-img-top" alt="${
-    element.titolo
+    <div class="card" style="width: 15rem;">
+      <img src="${element.imageUrl}" class="card-img-top" alt="${
+    element.title
   }">
       <div class="card-body">
-        <h5 class="card-title">${element.titolo}</h5>
-        <p class="card-text">${element.descrizione}</p>
+        <h5 class="card-title">${element.title}</h5>
+        <p class="card-text">${element.description}</p>
         <div class="card-footer">${renderCategory(element.categories)}</div>
         </div>
         </div>`;
 };
-// <a href="show.html?id=${element.id}" class="card-link">Dettagli</a>
 
 const renderCategory = (categories) => {
   let content;

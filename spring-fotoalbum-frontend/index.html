@@ -16,18 +16,21 @@
   <body>
     <div class="container">
       <h1>Photo Album</h1>
-
+      <!-- SEARCHBAR  -->
       <div>
-        <input
-          type="text"
-          id="searchNameField"
-          placeholder="Cerca Photo per Nome o descrizione"
-        />
-
-        <button class="btn btn-primary ms-3 mb-1" onclick="searchPhoto()">
-          Cerca
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="searchNameField"
+            placeholder="Cerca foto per nome o descrizione!"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="searchPhoto()">
+          Submit
         </button>
       </div>
+      <!-- Lista Foto -->
       <div id="root" class="container text-primary"></div>
     </div>
     <script src="script.js"></script>
