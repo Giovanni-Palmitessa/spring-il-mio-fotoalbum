@@ -1,5 +1,6 @@
 package com.experis.course.fotoalbum.service;
 
+import com.experis.course.fotoalbum.exceptions.CategoryNameUniqueExeption;
 import com.experis.course.fotoalbum.model.Category;
 import com.experis.course.fotoalbum.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,11 @@ public class CategoryService {
     }
 
     // metodo per salvare la nuova categoria
-    public Category saveCategory(Category category){
+    public Category saveCategory(Category category) throws CategoryNameUniqueExeption{
+        // controllo se il nome della categoria non esiste già
+        if (categoryRepository.existsByName(category.getName())){
+            throw new CategoryNameUniqueExeption(category.getName());
+        }
         category.setName(category.getName());
         return categoryRepository.save(category);
     }
