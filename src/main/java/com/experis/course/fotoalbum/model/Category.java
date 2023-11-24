@@ -12,7 +12,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message = "Il nome non può essere un campo vuoto!")
     @Size(max = 50)
     @Column(nullable = false, unique = true)
     private String name;
