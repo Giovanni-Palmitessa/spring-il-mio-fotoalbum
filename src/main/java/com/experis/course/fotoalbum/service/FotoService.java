@@ -30,6 +30,10 @@ public class FotoService {
         }
     }
 
+    public List<Foto> getFotoList() {
+        return fotoRepository.findAll();
+    }
+
     // metodo che restituisce una foto presa per id, altrimenti tira eccezione
     public Foto getFotoById(Integer id) throws FotoNotFoundException{
         // aggiungo un opzionale poichè potrei trovare la foto o no
