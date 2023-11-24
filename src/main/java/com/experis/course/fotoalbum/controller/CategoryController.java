@@ -17,6 +17,7 @@ public class CategoryController {
     CategoryService categoryService;
 
     // Metodi
+    // mostrare il form della categoria e lista delle categorie
     @GetMapping
     public String index(Model model) {
         // passo al model il categoryList con la lista delle categorie
@@ -26,6 +27,7 @@ public class CategoryController {
         return "categories/index";
     }
 
+    // salvare la categoria
     @PostMapping("/save")
     public String save(Category formCategory) {
         // salvo la nuova categoria
