@@ -135,4 +135,18 @@ public class FotoController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
         }
     }
+
+    // visibilità
+    @PostMapping("/toggleVisibility/{id}")
+    public String toggleVisibility(@PathVariable Integer id, Model model) {
+        try {
+            Foto foto = fotoService.getFotoById(id);
+            foto.setVisible(!foto.isVisible());
+            fotoService.editFoto(foto);
+
+            return "redirect:/fotos"; // o il percorso corretto in base alla tua configurazione
+        } catch (FotoNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
+        }
+    }
 }
