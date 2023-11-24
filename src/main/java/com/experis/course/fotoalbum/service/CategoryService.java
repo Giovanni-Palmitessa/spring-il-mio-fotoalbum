@@ -19,4 +19,9 @@ public class CategoryService {
     public List<Category> getAllCategories() {
         return categoryRepository.findByOrderByName();
     }
+
+    // metodo per salvare la nuova categoria
+    public Category saveCategory(Category category){
+        return categoryRepository.save(category);
+    }
 }
