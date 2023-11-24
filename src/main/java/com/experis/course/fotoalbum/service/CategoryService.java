@@ -22,7 +22,7 @@ public class CategoryService {
 
     // metodo per salvare la nuova categoria
     public Category saveCategory(Category category){
-        category.setName(category.getName().toLowerCase());
+        category.setName(category.getName());
         return categoryRepository.save(category);
     }
 }
