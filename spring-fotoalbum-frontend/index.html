@@ -12,10 +12,23 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Foto Album</title>
   </head>
+
   <body>
     <div class="container">
-      <h1>Foto Album</h1>
-      <div id="root"></div>
+      <h1>Photo Album</h1>
+
+      <div>
+        <input
+          type="text"
+          id="searchNameField"
+          placeholder="Cerca Photo per Nome o descrizione"
+        />
+
+        <button class="btn btn-primary ms-3 mb-1" onclick="searchPhoto()">
+          Cerca
+        </button>
+      </div>
+      <div id="root" class="container text-primary"></div>
     </div>
     <script src="script.js"></script>
   </body>
