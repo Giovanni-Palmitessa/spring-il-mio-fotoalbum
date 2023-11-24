@@ -30,4 +30,9 @@ public class CategoryService {
         category.setName(category.getName());
         return categoryRepository.save(category);
     }
+
+    // metodo per eliminare la categoria
+    public void deleteCategory(Integer id){
+        categoryRepository.deleteById(id);
+    }
 }
