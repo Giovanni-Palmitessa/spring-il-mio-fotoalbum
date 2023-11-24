@@ -35,7 +35,14 @@ public class SecurityConfiguration {
     }
 
     // Security Filteer chain
-    public SecurityFilterChain filterChain(HttpSecurity http){
-
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+        http
+                .authorizeHttpRequests()
+                .anyRequest()
+                .authenticated().and()
+                .formLogin().and()
+                .logout();
+        return http.build();
     }
 }
