@@ -23,6 +23,7 @@ public class DatabaseUserDetailsService implements UserDetailsService {
         Optional<User> loggedUser = userRepository.findByEmail(username);
         if (loggedUser.isPresent()){
             // utente trovato
+            // creo un DBUserDeails con dati dell'utente
             return new DatabaseUserDetails(loggedUser.get());
         } else {
             // L'utente non c'è sollevo eccezione
