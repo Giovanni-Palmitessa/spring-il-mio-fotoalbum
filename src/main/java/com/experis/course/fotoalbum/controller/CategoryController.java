@@ -29,6 +29,7 @@ public class CategoryController {
     @PostMapping("/save")
     public String save(Category formCategory) {
         // salvo la nuova categoria
+        categoryService.saveCategory(formCategory);
         return "redirect:/categories";
     }
 }
