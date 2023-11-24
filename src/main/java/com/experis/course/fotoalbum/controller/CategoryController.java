@@ -5,15 +5,14 @@ import com.experis.course.fotoalbum.model.Category;
 import com.experis.course.fotoalbum.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 @RequestMapping("/categories")
@@ -48,8 +47,12 @@ public class CategoryController {
             categoryService.saveCategory(formCategory);
             return "redirect:/categories";
         } catch (CategoryNameUniqueExeption e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "La categoria con nome: " + formCategory.getName() + " esiste già!");
+            // do un feedback all'utente che mi dice che la categoria esiste già
+            bindingResult.addError(new FieldError("category", "name", e.getMessage(), false, null, null,
+                    "La categoria esiste gia!"));
+            // ricarico le categorie
+            model.addAttribute("categoryList", categoryService.getAllCategories());
+            return "categories/index";
         }
     }
 }
