@@ -31,7 +31,7 @@ public class CategoryController {
     }
 
     // salvare la categoria
-    @PostMapping("/save")
+    @PostMapping
     public String save(@Valid @ModelAttribute("categoryObj")Category formCategory, BindingResult bindingResult,
                        Model model) {
         // se la categoria ha degli errori
