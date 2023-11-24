@@ -24,7 +24,7 @@ public class FotoRestController {
     // endopint per lista di tutte le foto
     @GetMapping
     public List<Foto> index(@RequestParam Optional<String> search) {
-        return fotoService.getFotoList(search);
+        return fotoService.getVisibleFotoList(search);
     }
 
     // endpoint per i dettagli della foto presa per id

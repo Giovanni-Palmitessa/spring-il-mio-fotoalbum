@@ -4,7 +4,7 @@ const root = document.getElementById("root");
 // Funzione per ottenere l'array delle foto
 const getPhoto = async (searchName = "") => {
   try {
-    const url = `${baseUrl}?search=${searchName}`;
+    const url = `${baseUrl}?search=${searchName}&visible=true`;
     const response = await axios.get(url);
     if (Array.isArray(response.data)) {
       renderPhotoList(response.data);

@@ -69,4 +69,14 @@ public class FotoService {
     public void deleteFoto(Integer id){
         fotoRepository.deleteById(id);
     }
+
+    // metodo per vedere solo foto visibili
+    public List<Foto> getVisibleFotoList(Optional<String> search) {
+        if (search.isPresent()) {
+            return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingAndVisible(search.get(), search.get(),
+                    true);
+        } else {
+            return fotoRepository.findAllVisibleFotos();
+        }
+    }
 }
