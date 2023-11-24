@@ -19,3 +19,19 @@ const renderCategories = (categories) => {
   }
   return content;
 };
+
+// funzione che renderizza la card della foto
+const renderFoto = (element) => {
+  return `<div class="card mb-5" style="width: 18rem;">
+      <img src="${
+        element.imageUrl
+      }" class="card-img-top" alt="Pizza Image" style="height: 300px">
+      <div class="card-body">
+        <h5 class="card-title">${element.title}</h5>
+        <p class="card-text">${element.description}</p>
+      </div>
+      <div class="card-body">
+          ${renderCategories(element.categories)}
+      </div>
+    </div>`;
+};
