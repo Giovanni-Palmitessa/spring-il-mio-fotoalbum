@@ -41,8 +41,9 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests()
                 .requestMatchers("/categories").hasAuthority("ADMIN")
-                .requestMatchers(HttpMethod.POST).hasAuthority("ADMIN")
-                .requestMatchers("/fotos").hasAuthority("ADMIN")
+                .requestMatchers("/users").hasAnyAuthority("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/fotos/").hasAuthority("ADMIN")
+                .requestMatchers("/fotos", "/fotos/").hasAuthority("ADMIN")
                 .requestMatchers("/**").permitAll()
                 .and().formLogin()
                 .and().logout();
