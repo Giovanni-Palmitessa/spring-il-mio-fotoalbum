@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -19,8 +21,10 @@ public class UserController {
     public String index(Authentication authentication, Model model) {
         DatabaseUserDetails principal = (DatabaseUserDetails) authentication.getPrincipal();
         User loggedUser = userRepository.findById(principal.getId()).get();
-        model.addAttribute("firstName", loggedUser.getFirstName());
-        model.addAttribute("lastName", loggedUser.getLastName());
+        model.addAttribute(loggedUser.getFirstName());
+        model.addAttribute(loggedUser.getLastName());
+        List<User> users = userRepository.findByRolesName("ADMIN");
+        model.addAttribute("users", users);
         // recupero la lista di users e la passo al model
         return "users/index";
     }

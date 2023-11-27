@@ -2,18 +2,24 @@ package com.experis.course.fotoalbum.controller;
 
 import com.experis.course.fotoalbum.exceptions.FotoNotFoundException;
 import com.experis.course.fotoalbum.model.Foto;
+import com.experis.course.fotoalbum.model.User;
 import com.experis.course.fotoalbum.service.CategoryService;
 import com.experis.course.fotoalbum.service.FotoService;
+import com.experis.course.fotoalbum.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -26,11 +32,25 @@ public class FotoController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private UserService userService;
+
     // Index mi mostra tutte le foto
     @GetMapping
-    public String index(@RequestParam Optional<String> search, Model model) {
+    public String index(@AuthenticationPrincipal UserDetails userDetails, @RequestParam Optional<String> search,
+                        Model model, User user) {
+        // cerco lo user se esiste con username
+        User currentUser = userService.findByEmail(userDetails.getUsername()).orElseThrow();
+        //istanzio lista di foto vuota
+        List<Foto> fotoList;
+        if (currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("SUPER_ADMIN"))) {
+            // se lo user è un SuperAdmin passo tutte le foto
+            fotoList = fotoService.getFotoList(currentUser, search);
+        } else {
+            fotoList = fotoService.getFotosByUser(currentUser, search);
+        }
         // passo al template la lista di Foto
-        model.addAttribute("fotoList", fotoService.getFotoList(search));
+        model.addAttribute("fotoList", fotoList);
         // passo al template la stringa di ricerca per precaricare il valore dell'input
         model.addAttribute("searchKeyword", search.orElse(""));
         return "fotos/index";
@@ -68,7 +88,8 @@ public class FotoController {
 
     // metodo che salva le foto inserite nel DB
     @PostMapping("/create")
-    public String store(@Valid @ModelAttribute("foto") Foto formFoto, BindingResult bindingResult,
+    public String store(@AuthenticationPrincipal UserDetails userDetails,
+                        @Valid @ModelAttribute("foto") Foto formFoto, BindingResult bindingResult,
                         RedirectAttributes redirectAttributes, Model model) {
         // verifico che i dati sono corretti prima di salvare
         if (bindingResult.hasErrors()){
@@ -76,7 +97,7 @@ public class FotoController {
             model.addAttribute("categoryList", categoryService.getAllCategories());
             return "fotos/form";
         }
-        // prima di salvare il libro gli setto visibile di default
+        /*// prima di salvare il libro gli setto visibile di default
         formFoto.setVisible(true);
         // Salvo la foto
         Foto savedFoto = fotoService.createFoto(formFoto);
@@ -84,7 +105,23 @@ public class FotoController {
         // aggiungo attributo per mostrare messaggio di conferma modifica
         redirectAttributes.addFlashAttribute("message",
                 "La foto " + savedFoto.getTitle() +" è stata creata con successo!");
-        return "redirect:/fotos/show/" + savedFoto.getId();
+        return "redirect:/fotos/show/" + savedFoto.getId();*/
+        try {
+            // Trova l'utente autenticato e collega la foto a quell'utente
+            User user = userService.findByEmail(userDetails.getUsername()).orElseThrow();
+            // prima di salvare il libro gli setto visibile di default
+            formFoto.setVisible(true);
+            // salvo la foto
+            Foto savedFoto = fotoService.createFoto(formFoto, user);
+            // aggiungo attributo per mostrare messaggio di conferma modifica
+            redirectAttributes.addFlashAttribute("message",
+                    "La foto " + savedFoto.getTitle() +" è stata creata con successo!");
+            return "redirect:/fotos/show/" + savedFoto.getId();
+        } catch (RuntimeException e) {
+            bindingResult.addError(new FieldError("foto", "title", e.getMessage(), false, null, null, "Il nome deve" +
+                    " essere unico!"));
+            return "fotos/form";
+        }
     }
 
 
@@ -152,7 +189,7 @@ public class FotoController {
             foto.setVisible(!foto.isVisible());
             fotoService.editFoto(foto);
 
-            return "redirect:/fotos"; // o il percorso corretto in base alla tua configurazione
+            return "redirect:/fotos";
         } catch (FotoNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
         }

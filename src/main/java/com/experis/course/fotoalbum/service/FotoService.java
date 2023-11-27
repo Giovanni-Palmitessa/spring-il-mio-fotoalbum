@@ -2,6 +2,7 @@ package com.experis.course.fotoalbum.service;
 
 import com.experis.course.fotoalbum.exceptions.FotoNotFoundException;
 import com.experis.course.fotoalbum.model.Foto;
+import com.experis.course.fotoalbum.model.User;
 import com.experis.course.fotoalbum.repository.FotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,21 +19,42 @@ public class FotoService {
     private FotoRepository fotoRepository;
 
     // Metodi
+    // custom non standard
+    // Metodo per ottenere le foto di un utente specifico
+    public List<Foto> getFotosByUser(User user, Optional<String> search) {
+        if (search.isPresent()){
+            return fotoRepository.findByUserAndTitleContainingIgnoreCaseOrDescriptionContaining(user,
+                    search.get(), search.get());
+        } else {
+            return fotoRepository.findByUser(user);
+        }
+    }
+
+    // metodo per vedere solo foto visibili
+    public List<Foto> getVisibleFotoList(Optional<String> search) {
+        if (search.isPresent()) {
+            return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingAndVisible(search.get(), search.get(),
+                    true);
+        } else {
+            return fotoRepository.findAllVisibleFotos();
+        }
+    }
 
     // metodo che restituisce la lista di foto con o senza filtri
-    public List<Foto> getFotoList(Optional<String> search) {
+    public List<Foto> getFotoList(User user, Optional<String> search ) {
         if (search.isPresent()) {
             // se il parametro search è presente chiamo il metodo custom
-            return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContaining(search.get(), search.get());
+            return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContaining(search.get(),
+                    search.get());
         } else {
             // se il parametro search non è presente mostro tutte le foto
             return fotoRepository.findAll();
         }
     }
 
-    public List<Foto> getFotoList() {
+    /*public List<Foto> getFotoList() {
         return fotoRepository.findAll();
-    }
+    }*/
 
     // metodo che restituisce una foto presa per id, altrimenti tira eccezione
     public Foto getFotoById(Integer id) throws FotoNotFoundException{
@@ -46,9 +68,29 @@ public class FotoService {
             throw new FotoNotFoundException("Foto con id " + id + " non trovata!");
         }
     }
+    // Metodo per ottenere le foto di un utente specifico
+    /*public List<Foto> getFotosByUser(User user, Optional<String> search) {
+        if (search.isPresent()) {
+            return fotoRepository.findByUserAndTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(user,
+                    search.get(), search.get());
+        } else {
+            return fotoRepository.findByUser(user);
+        }
+    }*/
+    public List<Foto> getAllFotos(Optional<String> search) {
+        if (search.isPresent()) {
+            return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContaining(search.get(), search.get());
+        } else {
+            return fotoRepository.findAll();
+        }
+    }
 
     // metodo che salva la foto
-    public Foto createFoto(Foto foto) {
+    public Foto createFoto(Foto foto, User user) {
+        if (user != null) {
+            foto.setUser(user); // Associa l'utente alla foto, se l'utente è fornito
+        }
+        foto.setId(null); // Imposta l'ID della foto su null
         try{
             return fotoRepository.save(foto);
         } catch (ResponseStatusException e) {
@@ -70,13 +112,5 @@ public class FotoService {
         fotoRepository.deleteById(id);
     }
 
-    // metodo per vedere solo foto visibili
-    public List<Foto> getVisibleFotoList(Optional<String> search) {
-        if (search.isPresent()) {
-            return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingAndVisible(search.get(), search.get(),
-                    true);
-        } else {
-            return fotoRepository.findAllVisibleFotos();
-        }
-    }
+
 }
