@@ -1,6 +1,7 @@
 package com.experis.course.fotoalbum.repository;
 
 import com.experis.course.fotoalbum.model.Foto;
+import com.experis.course.fotoalbum.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -18,4 +19,6 @@ public interface FotoRepository extends JpaRepository<Foto, Integer> {
     List<Foto> findByVisible(boolean visible);
     @Query("SELECT p FROM Foto p WHERE p.visible = true")
     List<Foto> findAllVisibleFotos();
+
+    List<Foto> findByUser(User user);
 }

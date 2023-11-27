@@ -2,6 +2,7 @@ package com.experis.course.fotoalbum.service;
 
 import com.experis.course.fotoalbum.exceptions.FotoNotFoundException;
 import com.experis.course.fotoalbum.model.Foto;
+import com.experis.course.fotoalbum.model.User;
 import com.experis.course.fotoalbum.repository.FotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,11 @@ public class FotoService {
     private FotoRepository fotoRepository;
 
     // Metodi
+    // custom non standard
+    // Metodo per ottenere le foto di un utente specifico
+    public List<Foto> getPhotosByUser(User user) {
+        return fotoRepository.findByUser(user);
+    }
 
     // metodo che restituisce la lista di foto con o senza filtri
     public List<Foto> getFotoList(Optional<String> search) {
