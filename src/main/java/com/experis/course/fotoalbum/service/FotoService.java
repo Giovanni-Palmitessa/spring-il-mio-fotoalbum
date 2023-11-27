@@ -54,7 +54,7 @@ public class FotoService {
     }
 
     // metodo che salva la foto
-    public Foto createFoto(Foto foto) {
+    public Foto createFoto(Foto foto, User user) {
         try{
             return fotoRepository.save(foto);
         } catch (ResponseStatusException e) {

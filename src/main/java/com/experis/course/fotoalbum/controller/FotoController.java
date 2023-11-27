@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -87,7 +88,8 @@ public class FotoController {
 
     // metodo che salva le foto inserite nel DB
     @PostMapping("/create")
-    public String store(@Valid @ModelAttribute("foto") Foto formFoto, BindingResult bindingResult,
+    public String store(@AuthenticationPrincipal UserDetails userDetails,
+                        @Valid @ModelAttribute("foto") Foto formFoto, BindingResult bindingResult,
                         RedirectAttributes redirectAttributes, Model model) {
         // verifico che i dati sono corretti prima di salvare
         if (bindingResult.hasErrors()){
@@ -95,7 +97,7 @@ public class FotoController {
             model.addAttribute("categoryList", categoryService.getAllCategories());
             return "fotos/form";
         }
-        // prima di salvare il libro gli setto visibile di default
+        /*// prima di salvare il libro gli setto visibile di default
         formFoto.setVisible(true);
         // Salvo la foto
         Foto savedFoto = fotoService.createFoto(formFoto);
@@ -103,7 +105,23 @@ public class FotoController {
         // aggiungo attributo per mostrare messaggio di conferma modifica
         redirectAttributes.addFlashAttribute("message",
                 "La foto " + savedFoto.getTitle() +" è stata creata con successo!");
-        return "redirect:/fotos/show/" + savedFoto.getId();
+        return "redirect:/fotos/show/" + savedFoto.getId();*/
+        try {
+            // Trova l'utente autenticato e collega la foto a quell'utente
+            User user = userService.findByEmail(userDetails.getUsername()).orElseThrow();
+            // prima di salvare il libro gli setto visibile di default
+            formFoto.setVisible(true);
+            // salvo la foto
+            Foto savedFoto = fotoService.createFoto(formFoto, user);
+            // aggiungo attributo per mostrare messaggio di conferma modifica
+            redirectAttributes.addFlashAttribute("message",
+                    "La foto " + savedFoto.getTitle() +" è stata creata con successo!");
+            return "redirect:/photos/show/" + savedFoto.getId();
+        } catch (RuntimeException e) {
+            bindingResult.addError(new FieldError("foto", "title", e.getMessage(), false, null, null, "Il nome deve" +
+                    " essere unico!"));
+            return "fotos/form";
+        }
     }
 
 
