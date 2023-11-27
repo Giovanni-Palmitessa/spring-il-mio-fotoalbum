@@ -29,10 +29,11 @@ public class FotoService {
     public List<Foto> getFotoList(Optional<String> search) {
         if (search.isPresent()) {
             // se il parametro search è presente chiamo il metodo custom
-            return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContaining(search.get(), search.get());
+            return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingAndVisible(search.get(),
+                    search.get(), true);
         } else {
             // se il parametro search non è presente mostro tutte le foto
-            return fotoRepository.findAll();
+            return fotoRepository.findAllVisibleFotos();
         }
     }
 
@@ -52,9 +53,25 @@ public class FotoService {
             throw new FotoNotFoundException("Foto con id " + id + " non trovata!");
         }
     }
+    // Metodo per ottenere le foto di un utente specifico
+    public List<Foto> getFotosByUser(User user) {
+        return fotoRepository.findByUser(user);
+    }
+
+    public List<Foto> getAllFotos(Optional<String> search) {
+        if (search.isPresent()) {
+            return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContaining(search.get(), search.get());
+        } else {
+            return fotoRepository.findAll();
+        }
+    }
 
     // metodo che salva la foto
     public Foto createFoto(Foto foto, User user) {
+        if (user != null) {
+            foto.setUser(user); // Associa l'utente alla foto, se l'utente è fornito
+        }
+        foto.setId(null); // Imposta l'ID della foto su null
         try{
             return fotoRepository.save(foto);
         } catch (ResponseStatusException e) {
