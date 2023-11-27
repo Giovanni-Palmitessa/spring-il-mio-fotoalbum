@@ -47,7 +47,7 @@ public class FotoController {
             // se lo user è un SuperAdmin passo tutte le foto
             fotoList = fotoService.getFotoList(search);
         } else {
-            fotoList = fotoService.getPhotosByUser(currentUser);
+            fotoList = fotoService.getFotosByUser(currentUser, search);
         }
         // passo al template la lista di Foto
         model.addAttribute("fotoList", fotoService.getFotoList(search));

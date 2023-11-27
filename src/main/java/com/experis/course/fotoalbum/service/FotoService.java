@@ -21,19 +21,24 @@ public class FotoService {
     // Metodi
     // custom non standard
     // Metodo per ottenere le foto di un utente specifico
-    public List<Foto> getPhotosByUser(User user) {
-        return fotoRepository.findByUser(user);
+    public List<Foto> getFotosByUser(User user, Optional<String> search) {
+        if (search.isPresent()){
+            return fotoRepository.findByUserAndTitleContainingIgnoreCaseOrDescription(user,
+                    search.get(), search.get());
+        } else {
+            return fotoRepository.findByUser(user);
+        }
     }
 
     // metodo che restituisce la lista di foto con o senza filtri
     public List<Foto> getFotoList(Optional<String> search) {
         if (search.isPresent()) {
             // se il parametro search è presente chiamo il metodo custom
-            return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingAndVisible(search.get(),
-                    search.get(), true);
+            return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContaining(search.get(),
+                    search.get());
         } else {
             // se il parametro search non è presente mostro tutte le foto
-            return fotoRepository.findAllVisibleFotos();
+            return fotoRepository.findAll();
         }
     }
 
@@ -54,10 +59,14 @@ public class FotoService {
         }
     }
     // Metodo per ottenere le foto di un utente specifico
-    public List<Foto> getFotosByUser(User user) {
-        return fotoRepository.findByUser(user);
-    }
-
+    /*public List<Foto> getFotosByUser(User user, Optional<String> search) {
+        if (search.isPresent()) {
+            return fotoRepository.findByUserAndTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(user,
+                    search.get(), search.get());
+        } else {
+            return fotoRepository.findByUser(user);
+        }
+    }*/
     public List<Foto> getAllFotos(Optional<String> search) {
         if (search.isPresent()) {
             return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContaining(search.get(), search.get());

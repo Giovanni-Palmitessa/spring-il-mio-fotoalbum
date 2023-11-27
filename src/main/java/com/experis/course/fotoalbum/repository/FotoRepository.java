@@ -21,4 +21,9 @@ public interface FotoRepository extends JpaRepository<Foto, Integer> {
     List<Foto> findAllVisibleFotos();
 
     List<Foto> findByUser(User user);
+
+    @Query("SELECT p FROM Foto p WHERE p.user = :user AND (LOWER(p.title) LIKE LOWER(CONCAT('%', :titleKeyword, '%')" +
+            ") OR (p.description) LIKE LOWER(CONCAT('%', :descriptionKeyword, '%')))")
+    List<Foto> findByUserAndTitleContainingIgnoreCaseOrDescription(User user, String titleKeyword,
+                                                                                     String descriptionKeyword);
 }
