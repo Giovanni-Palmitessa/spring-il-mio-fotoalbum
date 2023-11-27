@@ -43,6 +43,8 @@ public class FotoController {
         User currentUser = userService.findByEmail(userDetails.getUsername()).orElseThrow();
         //istanzio lista di foto vuota
         List<Foto> fotoList;
+        // istanzio lista di User vuota
+        List<User> userList = userService.getAllUsers();
         if (currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("SUPER_ADMIN"))) {
             // se lo user è un SuperAdmin passo tutte le foto
             fotoList = fotoService.getFotoList(currentUser, search);
@@ -51,6 +53,8 @@ public class FotoController {
         }
         // passo al template la lista di Foto
         model.addAttribute("fotoList", fotoList);
+        // passo all'utente i dettagli dello user
+        model.addAttribute("users", userList);
         // passo al template la stringa di ricerca per precaricare il valore dell'input
         model.addAttribute("searchKeyword", search.orElse(""));
         return "fotos/index";
