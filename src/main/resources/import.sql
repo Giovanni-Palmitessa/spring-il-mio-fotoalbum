@@ -19,7 +19,9 @@ INSERT INTO db_fotoalbum.categories (description, name) VALUES ('Instantanea di 
 INSERT INTO db_fotoalbum.categories (description, name) VALUES ('Manifestazioni culturali e tradizioni', 'Cultura');
 INSERT INTO db_fotoalbum.categories (description, name) VALUES ('Momenti dolci e romantici', 'Amore');
 INSERT INTO roles (id, name) VALUES(1, 'ADMIN');
+INSERT INTO roles (id, name) VALUES(2, 'SUPER_ADMIN');
 INSERT INTO users (email, first_name, last_name, registered_at, password) VALUES('gino@email.com', 'Gino', 'BuonVino', '2023-11-24 10:35', '{noop}gino');
 INSERT INTO users (email, first_name, last_name, registered_at, password) VALUES('jane@email.com', 'Jane', 'Smith', '2023-11-24 10:35','{noop}jane');
 INSERT INTO users_roles (user_id, roles_id) VALUES(1, 1);
 INSERT INTO users_roles (user_id, roles_id) VALUES(2, 1);
+INSERT INTO users_roles (user_id, roles_id) VALUES(2, 2);

@@ -58,6 +58,13 @@ public class FotoController {
         model.addAttribute("categoryList", categoryService.getAllCategories());
         return "fotos/form";
     }
+    /*private User getCurrentUser(Authentication authentication) {
+        if (authentication != null) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            return userService.getUserByUsername(userDetails.getUsername());
+        }
+        return null;
+    }*/
 
     // metodo che salva le foto inserite nel DB
     @PostMapping("/create")
@@ -79,6 +86,7 @@ public class FotoController {
                 "La foto " + savedFoto.getTitle() +" è stata creata con successo!");
         return "redirect:/fotos/show/" + savedFoto.getId();
     }
+
 
     // metodo che mi permette di editare una foto esisitente tramite id
     @GetMapping("/edit/{id}")
