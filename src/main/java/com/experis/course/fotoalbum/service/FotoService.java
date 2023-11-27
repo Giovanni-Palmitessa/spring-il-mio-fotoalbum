@@ -23,15 +23,25 @@ public class FotoService {
     // Metodo per ottenere le foto di un utente specifico
     public List<Foto> getFotosByUser(User user, Optional<String> search) {
         if (search.isPresent()){
-            return fotoRepository.findByUserAndTitleContainingIgnoreCaseOrDescription(user,
+            return fotoRepository.findByUserAndTitleContainingIgnoreCaseOrDescriptionContaining(user,
                     search.get(), search.get());
         } else {
             return fotoRepository.findByUser(user);
         }
     }
 
+    // metodo per vedere solo foto visibili
+    public List<Foto> getVisibleFotoList(Optional<String> search) {
+        if (search.isPresent()) {
+            return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingAndVisible(search.get(), search.get(),
+                    true);
+        } else {
+            return fotoRepository.findAllVisibleFotos();
+        }
+    }
+
     // metodo che restituisce la lista di foto con o senza filtri
-    public List<Foto> getFotoList(Optional<String> search) {
+    public List<Foto> getFotoList(User user, Optional<String> search ) {
         if (search.isPresent()) {
             // se il parametro search è presente chiamo il metodo custom
             return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContaining(search.get(),
@@ -42,9 +52,9 @@ public class FotoService {
         }
     }
 
-    public List<Foto> getFotoList() {
+    /*public List<Foto> getFotoList() {
         return fotoRepository.findAll();
-    }
+    }*/
 
     // metodo che restituisce una foto presa per id, altrimenti tira eccezione
     public Foto getFotoById(Integer id) throws FotoNotFoundException{
@@ -102,13 +112,5 @@ public class FotoService {
         fotoRepository.deleteById(id);
     }
 
-    // metodo per vedere solo foto visibili
-    public List<Foto> getVisibleFotoList(Optional<String> search) {
-        if (search.isPresent()) {
-            return fotoRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingAndVisible(search.get(), search.get(),
-                    true);
-        } else {
-            return fotoRepository.findAllVisibleFotos();
-        }
-    }
+
 }

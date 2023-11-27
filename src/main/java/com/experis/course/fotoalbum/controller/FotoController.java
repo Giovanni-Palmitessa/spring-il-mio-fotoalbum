@@ -38,19 +38,19 @@ public class FotoController {
     // Index mi mostra tutte le foto
     @GetMapping
     public String index(@AuthenticationPrincipal UserDetails userDetails, @RequestParam Optional<String> search,
-                        Model model) {
+                        Model model, User user) {
         // cerco lo user se esiste con username
         User currentUser = userService.findByEmail(userDetails.getUsername()).orElseThrow();
         //istanzio lista di foto vuota
         List<Foto> fotoList;
         if (currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("SUPER_ADMIN"))) {
             // se lo user è un SuperAdmin passo tutte le foto
-            fotoList = fotoService.getFotoList(search);
+            fotoList = fotoService.getFotoList(user, search);
         } else {
             fotoList = fotoService.getFotosByUser(currentUser, search);
         }
         // passo al template la lista di Foto
-        model.addAttribute("fotoList", fotoService.getFotoList(search));
+        model.addAttribute("fotoList", fotoService.getFotoList(user, search));
         // passo al template la stringa di ricerca per precaricare il valore dell'input
         model.addAttribute("searchKeyword", search.orElse(""));
         return "fotos/index";
