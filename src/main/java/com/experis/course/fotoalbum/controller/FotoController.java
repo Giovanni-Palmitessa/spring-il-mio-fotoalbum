@@ -189,7 +189,7 @@ public class FotoController {
             foto.setVisible(!foto.isVisible());
             fotoService.editFoto(foto);
 
-            return "redirect:/fotos"; // o il percorso corretto in base alla tua configurazione
+            return "redirect:/fotos";
         } catch (FotoNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto con id: " + id + " non è stata trovata!");
         }
