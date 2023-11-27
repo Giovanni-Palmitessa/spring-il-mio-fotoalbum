@@ -10,11 +10,18 @@
 <!--MAIN-->
 <main>
     <div class="container">
+        <!--Messaggio creazione categoria-->
         <div th:if="${messageSuccess != null}" class="alert alert-success alert-dismissible fade show mt-4">
             <span th:text="${messageSuccess}"></span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <h1>Categories</h1>
+        <!--Messaggio cancellazione categoria-->
+        <div th:if="${messageDanger != null}" class="alert alert-danger alert-dismissible fade show mt-4">
+            <span th:text="${messageDanger}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <!--Lista categorie-->
+        <h1>Categorie</h1>
         <hr>
         <section>
             <form

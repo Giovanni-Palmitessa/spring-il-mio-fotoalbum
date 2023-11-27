@@ -62,9 +62,14 @@ public class CategoryController {
 
     // Metodo che gestisce la richiesta di eliminazione
     @PostMapping("/delete")
-    public String delete(@RequestParam("id") Integer id) {
+    public String delete(@RequestParam("id") Integer id, @ModelAttribute("categoryObj")Category formCategory,
+                         RedirectAttributes redirectAttributes) {
         try {
+            // cancello la categoria
             categoryService.deleteCategory(id);
+            // messaggio cancellazione categoria
+            redirectAttributes.addFlashAttribute("messageDanger",
+                    "La categoria " + formCategory.getName() +" è stata cancellata con successo!");
             return "redirect:/categories";
         } catch (CategoryNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
