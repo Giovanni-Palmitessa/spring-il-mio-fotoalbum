@@ -28,6 +28,9 @@
                 <div class="bg-dark p-3 bg-opacity-75 rounded-5">
                     <h3 class="card-title fw-bold text-success" th:text="*{title}"></h3>
                     <p class="card-text fw-semibold fs-4" th:text="*{description}"></p>
+                    <p> Creata da:
+                        <span th:text="${foto.user != null} ? ${foto.user.firstName + ' ' + foto.user.lastName} : 'Nessun utente'"> </span>
+                    </p>
 
                     <!--CATEGORIE-->
                     <h3 class="text-danger">Categorie</h3>
