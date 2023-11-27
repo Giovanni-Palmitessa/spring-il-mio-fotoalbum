@@ -33,7 +33,7 @@ public class FotoController {
     private CategoryService categoryService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     // Index mi mostra tutte le foto
     @GetMapping
@@ -45,12 +45,12 @@ public class FotoController {
         List<Foto> fotoList;
         if (currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("SUPER_ADMIN"))) {
             // se lo user è un SuperAdmin passo tutte le foto
-            fotoList = fotoService.getFotoList(user, search);
+            fotoList = fotoService.getFotoList(currentUser, search);
         } else {
             fotoList = fotoService.getFotosByUser(currentUser, search);
         }
         // passo al template la lista di Foto
-        model.addAttribute("fotoList", fotoService.getFotoList(user, search));
+        model.addAttribute("fotoList", fotoList);
         // passo al template la stringa di ricerca per precaricare il valore dell'input
         model.addAttribute("searchKeyword", search.orElse(""));
         return "fotos/index";

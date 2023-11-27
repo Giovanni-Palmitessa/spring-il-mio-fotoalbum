@@ -1,15 +1,18 @@
 package com.experis.course.fotoalbum.controller;
 
 import com.experis.course.fotoalbum.exceptions.CategoryNameUniqueExeption;
+import com.experis.course.fotoalbum.exceptions.CategoryNotFoundException;
 import com.experis.course.fotoalbum.model.Category;
 import com.experis.course.fotoalbum.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 @RequestMapping("/categories")
@@ -56,7 +59,11 @@ public class CategoryController {
     // Metodo che gestisce la richiesta di eliminazione
     @PostMapping("/delete")
     public String delete(@RequestParam("id") Integer id) {
-        categoryService.deleteCategory(id);
-        return "redirect:/categories";
+        try {
+            categoryService.deleteCategory(id);
+            return "redirect:/categories";
+        } catch (CategoryNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
     }
 }
