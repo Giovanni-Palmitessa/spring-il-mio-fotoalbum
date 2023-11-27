@@ -116,7 +116,7 @@ public class FotoController {
             // aggiungo attributo per mostrare messaggio di conferma modifica
             redirectAttributes.addFlashAttribute("message",
                     "La foto " + savedFoto.getTitle() +" è stata creata con successo!");
-            return "redirect:/photos/show/" + savedFoto.getId();
+            return "redirect:/fotos/show/" + savedFoto.getId();
         } catch (RuntimeException e) {
             bindingResult.addError(new FieldError("foto", "title", e.getMessage(), false, null, null, "Il nome deve" +
                     " essere unico!"));
