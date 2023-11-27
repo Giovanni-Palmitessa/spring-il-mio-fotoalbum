@@ -53,12 +53,6 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <!--<div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Visibile SI/NO
-                                </label>
-                            </div>-->
                             <form th:action="@{/fotos/toggleVisibility/{id}(id=*{id})}" method="post">
                                 <input class="form-check-input" type="checkbox" id="visibilityCheckbox_${foto.id}" th:checked="${foto.visible}" onchange="this.form.submit()" />
                                 <label class="form-check-label" for="visibilityCheckbox_${foto.id}">
