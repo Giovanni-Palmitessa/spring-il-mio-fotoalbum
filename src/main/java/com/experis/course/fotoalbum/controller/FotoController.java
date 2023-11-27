@@ -101,15 +101,6 @@ public class FotoController {
             model.addAttribute("categoryList", categoryService.getAllCategories());
             return "fotos/form";
         }
-        /*// prima di salvare il libro gli setto visibile di default
-        formFoto.setVisible(true);
-        // Salvo la foto
-        Foto savedFoto = fotoService.createFoto(formFoto);
-        // reindirizzo allo show del libro appena creato
-        // aggiungo attributo per mostrare messaggio di conferma modifica
-        redirectAttributes.addFlashAttribute("message",
-                "La foto " + savedFoto.getTitle() +" è stata creata con successo!");
-        return "redirect:/fotos/show/" + savedFoto.getId();*/
         try {
             // Trova l'utente autenticato e collega la foto a quell'utente
             User user = userService.findByEmail(userDetails.getUsername()).orElseThrow();

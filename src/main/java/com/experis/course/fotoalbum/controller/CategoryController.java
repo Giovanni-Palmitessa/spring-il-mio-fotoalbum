@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/categories")
@@ -35,7 +36,7 @@ public class CategoryController {
     // salvare la categoria
     @PostMapping
     public String save(@Valid @ModelAttribute("categoryObj")Category formCategory, BindingResult bindingResult,
-                       Model model) {
+                       Model model, RedirectAttributes redirectAttributes) {
         // se la categoria ha degli errori
         if (bindingResult.hasErrors()){
             // ci sono errori ti ricarico la pagina
@@ -45,6 +46,9 @@ public class CategoryController {
         try {
             // salvo la nuova categoria
             categoryService.saveCategory(formCategory);
+            // messaggio creazione categoria
+            redirectAttributes.addFlashAttribute("messageSuccess",
+                    "La categoria " + formCategory.getName() +" è stata creata con successo!");
             return "redirect:/categories";
         } catch (CategoryNameUniqueExeption e) {
             // do un feedback all'utente che mi dice che la categoria esiste già
