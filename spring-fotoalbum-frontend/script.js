@@ -66,3 +66,16 @@ const renderPhotoList = (data) => {
 
 // Esegui la funzione per ottenere l'elenco delle foto all'avvio
 getPhoto();
+
+// Leggi la query string e mostra il messaggio
+const urlParams = new URLSearchParams(window.location.search);
+const message = urlParams.get("message");
+const error = urlParams.get("error");
+
+if (message) {
+  // Visualizza un messaggio di successo
+  alert(message);
+} else if (error) {
+  // Visualizza un messaggio di errore
+  alert(error);
+}
