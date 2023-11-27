@@ -27,6 +27,8 @@ public class User {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Foto> fotos = new HashSet<>();
 
     // Getter e Setter
     public Integer getId() {
@@ -83,5 +85,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Foto> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(Set<Foto> fotos) {
+        this.fotos = fotos;
     }
 }
