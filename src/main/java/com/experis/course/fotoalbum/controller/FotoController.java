@@ -5,6 +5,7 @@ import com.experis.course.fotoalbum.model.Foto;
 import com.experis.course.fotoalbum.model.User;
 import com.experis.course.fotoalbum.service.CategoryService;
 import com.experis.course.fotoalbum.service.FotoService;
+import com.experis.course.fotoalbum.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,9 @@ public class FotoController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    UserService userService;
 
     // Index mi mostra tutte le foto
     @GetMapping
