@@ -1,5 +1,6 @@
 package com.experis.course.fotoalbum.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -27,9 +28,12 @@ public class Foto {
     private String imageUrl;
     @Column(nullable = false)
     private boolean visible;
-
     @ManyToMany
     private List<Category> categories;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
 
     // GETTER E SETTER
     public Integer getId() {
@@ -78,5 +82,13 @@ public class Foto {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
