@@ -21,8 +21,8 @@ public class UserController {
     public String index(Authentication authentication, Model model) {
         DatabaseUserDetails principal = (DatabaseUserDetails) authentication.getPrincipal();
         User loggedUser = userRepository.findById(principal.getId()).get();
-        model.addAttribute(loggedUser.getFirstName());
-        model.addAttribute(loggedUser.getLastName());
+        model.addAttribute("firstName", loggedUser.getFirstName());
+        model.addAttribute("lastName", loggedUser.getLastName());
         List<User> users = userRepository.findByRolesName("ADMIN");
         model.addAttribute("users", users);
         // recupero la lista di users e la passo al model

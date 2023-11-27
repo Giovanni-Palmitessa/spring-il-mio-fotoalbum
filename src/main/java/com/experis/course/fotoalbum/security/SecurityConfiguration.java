@@ -42,7 +42,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers("/contacts").hasAuthority("SUPER_ADMIN")
                 .requestMatchers("/categories").hasAnyAuthority("ADMIN", "SUPER_ADMIN")
-                .requestMatchers("/users").hasAuthority("SUPER_ADMIN")
+                .requestMatchers("/users").hasAnyAuthority("ADMIN", "SUPER_ADMIN")
                 .requestMatchers(HttpMethod.POST, "/fotos/**").hasAnyAuthority("ADMIN", "SUPER_ADMIN")
                 .requestMatchers("/fotos", "/fotos/**").hasAnyAuthority("ADMIN", "SUPER_ADMIN")
                 .requestMatchers("/**").permitAll()
