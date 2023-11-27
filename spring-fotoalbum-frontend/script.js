@@ -25,16 +25,18 @@ const searchPhoto = () => {
 // Funzione per renderizzare ogni foto nell'elenco
 const renderPhoto = (element) => {
   return `
-    <div class="card" style="width: 15rem;">
-      <img src="${element.imageUrl}" class="card-img-top" alt="${
-    element.title
-  }">
+    <div class="card" style="width: 500px">
+      <img src="${
+        element.imageUrl
+      }" class="card-img-top" style="height:300px" alt="${element.title}">
       <div class="card-body">
-        <h5 class="card-title">${element.title}</h5>
-        <p class="card-text">${element.description}</p>
+        <div style="height:150px">
+          <h5 class="card-title">${element.title}</h5>
+          <p class="card-text">${element.description}</p>
+        </div>
         <div class="card-footer">${renderCategory(element.categories)}</div>
         </div>
-        </div>`;
+      </div>`;
 };
 
 const renderCategory = (categories) => {
@@ -54,9 +56,9 @@ const renderCategory = (categories) => {
 
 // Funzione per renderizzare l'elenco delle foto
 const renderPhotoList = (data) => {
-  let content = '<div class="row">';
+  let content = '<div class="d-flex justify-content-between flex-wrap">';
   data.forEach((element) => {
-    content += `<div class="col-4 mt-3">${renderPhoto(element)}</div>`;
+    content += `<div class="my-5">${renderPhoto(element)}</div>`;
   });
   content += "</div>";
   root.innerHTML = content;

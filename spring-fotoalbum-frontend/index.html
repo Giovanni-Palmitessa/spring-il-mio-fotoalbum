@@ -15,24 +15,33 @@
 
   <body>
     <div class="container">
-      <h1>Photo Album</h1>
+      <h1 class="my-3">Foto Album</h1>
       <!-- SEARCHBAR  -->
       <div>
-        <div class="mb-3">
-          <input
-            type="text"
-            class="form-control"
-            id="searchNameField"
-            placeholder="Cerca foto per nome o descrizione!"
-          />
+        <div class="container-fluid">
+          <div class="d-flex mb-4">
+            <input
+              type="text"
+              class="form-control me-3"
+              id="searchNameField"
+              placeholder="Cerca foto per nome o descrizione!"
+            />
+            <button
+              type="submit"
+              class="btn btn-primary"
+              onclick="searchPhoto()"
+            >
+              Cerca
+            </button>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary" onclick="searchPhoto()">
-          Submit
+      </div>
+      <!-- BOTTONE CHE MANDA AL FORM PER SCRIVERE UN MESSAGGIO -->
+      <div class="d-flex justify-content-center mb-4">
+        <button class="btn btn-primary p-2">
+          <a href="contact.html" class="text-white">Scrivi un Messaggio</a>
         </button>
       </div>
-      <button class="btn btn-primary">
-        <a href="contact.html">Scrivi un Messaggio</a>
-      </button>
       <!-- Lista Foto -->
       <div id="root" class="container text-primary"></div>
     </div>
