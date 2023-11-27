@@ -2,11 +2,14 @@ package com.experis.course.fotoalbum.controller;
 
 import com.experis.course.fotoalbum.exceptions.FotoNotFoundException;
 import com.experis.course.fotoalbum.model.Foto;
+import com.experis.course.fotoalbum.model.User;
 import com.experis.course.fotoalbum.service.CategoryService;
 import com.experis.course.fotoalbum.service.FotoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -28,7 +32,18 @@ public class FotoController {
 
     // Index mi mostra tutte le foto
     @GetMapping
-    public String index(@RequestParam Optional<String> search, Model model) {
+    public String index(@AuthenticationPrincipal UserDetails userDetails, @RequestParam Optional<String> search,
+                        Model model) {
+        // cerco lo user se esiste con username
+        User currentUser = userService.findByEmail(userDetails.getUsername()).orElseThrow();
+        //istanzio lista di foto vuota
+        List<Foto> fotoList;
+        if (currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("SUPER_ADMIN"))) {
+            // se lo user è un SuperAdmin passo tutte le foto
+            fotoList = fotoService.getFotoList(search);
+        } else {
+            fotoList = fotoService.getPhotosByUser(currentUser);
+        }
         // passo al template la lista di Foto
         model.addAttribute("fotoList", fotoService.getFotoList(search));
         // passo al template la stringa di ricerca per precaricare il valore dell'input
